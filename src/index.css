@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* Hide default cursor */
+* {
+  cursor: none !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070B18;
+}
+::-webkit-scrollbar-thumb {
+  background: #7C5CFC;
+  border-radius: 10px;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Glow effect */
+.glow-purple {
+  box-shadow: 0 0 30px rgba(124, 92, 252, 0.4);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #7C5CFC, #9E78FF, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Blob animation */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.blob {
+  animation: blob 7s infinite;
+}
+.blob-delay-2 {
+  animation-delay: 2s;
+}
+.blob-delay-4 {
+  animation-delay: 4s;
+}
+
+/* Section scroll reveal */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light mode */
+.light-mode {
+  background-color: #f8f9ff;
+  color: #0a0a0a;
+}
+/* ===== CUSTOM TEXT SELECTION ===== */
+::selection {
+  background: rgba(124, 92, 252, 0.35);
+  color: #ffffff;
+}
+::-moz-selection {
+  background: rgba(124, 92, 252, 0.35);
+  color: #ffffff;
+}
+
+/* ===== BLOB MORPH ANIMATION (Hero Image) ===== */
+@keyframes blobMorph {
+  0%, 100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+  25%       { border-radius: 30% 70% 40% 60% / 60% 30% 70% 40%; }
+  50%       { border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%; }
+  75%       { border-radius: 40% 60% 30% 70% / 70% 40% 60% 30%; }
+}
+
+.blob-morph {
+  animation: blobMorph 8s ease-in-out infinite;
+}
+
+.blob-morph-reverse {
+  animation: blobMorph 10s ease-in-out infinite reverse;
+}
+
+/* ═══════════════════════════════════════
+   LIGHT MODE PREMIUM IMPROVEMENTS
+═══════════════════════════════════════ */
+
+/* Richer light mode body background */
+html.light body {
+  background: linear-gradient(145deg, #faf9ff 0%, #ffffff 50%, #f5f3ff 100%);
+  background-attachment: fixed;
+}
+
+/* Alternating section depth in light mode */
+html.light #education,
+html.light #projects {
+  background: linear-gradient(180deg, #f5f3ff 0%, #faf9ff 100%) !important;
+}
+
+/* Premium glass cards in light mode */
+html.light .glass-light {
+  background: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(124, 92, 252, 0.13) !important;
+  box-shadow: 0 4px 28px rgba(124, 92, 252, 0.07),
+              0 1px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Subtle purple-tint shadows on cards in light mode */
+html.light [class*="rounded-2xl"]:not([class*="bg-transparent"]) {
+  box-shadow: 0 2px 18px rgba(124, 92, 252, 0.06), 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+/* Better blob morphing — slightly more visible in light mode */
+html.light .blob {
+  opacity: 0.7;
+}
+
+/* Better skill bar glow in light mode */
+html.light [style*="boxShadow"] {
+  transition: box-shadow 0.3s ease;
+}
+
+/* ═══════════════════════════════════════
+   HERO ORGANIC BLOB ROTATION HELPER
+═══════════════════════════════════════ */
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 18s linear infinite;
+}
+/* ==============================================
+   DEEP PURPLE LIGHT MODE
+   #520380 · #3A025B · #220135 · #1A0129 · #11001C
+============================================== */
+
+/* ── Gradient text → deep purple ── */
+html.light .text-gradient {
+  background:              linear-gradient(135deg, #520380 0%, #3A025B 55%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+}
+
+/* ── Base ── */
+html.light body {
+  background: #f3eeff;
+  color:      #11001C;
+}
+
+/* ── Text selection ── */
+html.light ::selection      { background: rgba(82,3,128,0.2); color: #11001C; }
+html.light ::-moz-selection { background: rgba(82,3,128,0.2); color: #11001C; }
+
+/* ── Scrollbar ── */
+html.light ::-webkit-scrollbar-track { background: #f3eeff; }
+html.light ::-webkit-scrollbar-thumb { background: #520380; border-radius: 10px; }
+
+/* ── Section backgrounds ── */
+html.light #home         { background: linear-gradient(140deg, #e8d9ff 0%, #f3eeff 60%, #ede0ff 100%) !important; }
+html.light #about        { background: #ffffff !important; }
+html.light #education    { background: linear-gradient(160deg, #f3eeff 0%, #e8d9ff 100%) !important; }
+html.light #skills       { background: #ffffff !important; }
+html.light #projects     { background: linear-gradient(160deg, #f5f0ff 0%, #eee2ff 100%) !important; }
+html.light #certificates { background: #ffffff !important; }
+html.light #contact      { background: linear-gradient(160deg, #f3eeff 0%, #f5f0ff 100%) !important; }
+
+/* ── HireMe — keep very dark with this palette ── */
+html.light #hire {
+  background: linear-gradient(135deg, #1A0129 0%, #220135 100%) !important;
+}
+
+/* ── Typography ── */
+html.light .text-gray-400 { color: #6b21a8 !important; }
+html.light .text-gray-500 { color: #3A025B !important; }
+html.light .text-gray-600 { color: #220135 !important; }
+html.light .text-gray-700 { color: #1A0129 !important; }
+html.light .text-gray-900 { color: #11001C !important; }
+
+/* ── Purple accent overrides ── */
+html.light .text-purple-400              { color: #520380  !important; }
+html.light .text-purple-300              { color: #6b21a8  !important; }
+html.light .text-purple-600              { color: #3A025B  !important; }
+html.light .text-purple-700              { color: #220135  !important; }
+html.light .bg-purple-100                { background-color: #ede9fe !important; }
+html.light .bg-purple-50                 { background-color: #f5f0ff !important; }
+html.light .border-purple-200            { border-color: rgba(82,3,128,0.3)  !important; }
+html.light .border-purple-300            { border-color: rgba(82,3,128,0.45) !important; }
+html.light .border-purple-500\/40        { border-color: rgba(82,3,128,0.45) !important; }
+html.light .hover\:bg-purple-500\/10:hover { background-color: rgba(82,3,128,0.1) !important; }
+html.light .hover\:bg-purple-50:hover    { background-color: #ede9fe !important; }
+html.light .hover\:bg-purple-100:hover   { background-color: #e8d9ff !important; }
+html.light .hover\:text-purple-600:hover { color: #3A025B !important; }
+html.light .hover\:text-purple-300:hover { color: #520380 !important; }
+
+/* ── "Open to Opportunities" badge ── */
+html.light .bg-purple-500\/15 {
+  background:   rgba(82,3,128,0.12) !important;
+  border-color: rgba(82,3,128,0.35) !important;
+  color:        #3A025B !important;
+}
+html.light .bg-purple-100.text-purple-700 {
+  background:   linear-gradient(135deg, #e8d9ff, #d8b4fe) !important;
+  border-color: rgba(82,3,128,0.4) !important;
+  color:        #220135 !important;
+}
+
+/* ── Background fills ── */
+html.light .bg-white    { background-color: #ffffff !important; }
+html.light .bg-gray-50  { background: linear-gradient(135deg, #f0e8ff, #f3eeff) !important; }
+html.light .bg-gray-100 { background-color: #ede9fe !important; }
+html.light .bg-gray-200 { background-color: #e8d9ff !important; }
+html.light .hover\:bg-gray-200:hover { background-color: #e8d9ff !important; }
+html.light .hover\:bg-gray-100:hover { background-color: #f3eeff !important; }
+
+/* ── Gradient buttons → deep purple ── */
+html.light .from-purple-600 { --tw-gradient-from: #3A025B !important; }
+html.light .to-purple-400   { --tw-gradient-to:   #520380 !important; }
+html.light .from-purple-500 { --tw-gradient-from: #520380 !important; }
+html.light .to-purple-300   { --tw-gradient-to:   #7c3aed !important; }
+html.light .hover\:from-purple-500:hover { --tw-gradient-from: #520380 !important; }
+html.light .hover\:to-purple-300:hover   { --tw-gradient-to:   #7c3aed !important; }
+
+/* ── Borders ── */
+html.light .border-gray-100 { border-color: rgba(82,3,128,0.18) !important; }
+html.light .border-gray-200 { border-color: rgba(82,3,128,0.26) !important; }
+
+/* ── Cards ── */
+html.light .rounded-2xl {
+  border-color: rgba(82,3,128,0.16) !important;
+  box-shadow:   0 2px 18px rgba(82,3,128,0.09),
+                0 1px 4px  rgba(0,0,0,0.05) !important;
+  transition:   box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+html.light .rounded-2xl:hover {
+  border-color: rgba(82,3,128,0.32) !important;
+  box-shadow:   0 10px 36px rgba(82,3,128,0.15),
+                0 2px 8px  rgba(0,0,0,0.07) !important;
+}
+html.light .rounded-xl {
+  border-color: rgba(82,3,128,0.14) !important;
+}
+html.light .rounded-xl:hover {
+  border-color: rgba(82,3,128,0.3) !important;
+}
+html.light .rounded-3xl {
+  border-color: rgba(82,3,128,0.2) !important;
+}
+
+/* ── Form inputs ── */
+html.light input[type="text"],
+html.light input[type="email"],
+html.light textarea {
+  background-color: #ffffff !important;
+  border-color:     rgba(82,3,128,0.3) !important;
+  color:            #11001C !important;
+}
+html.light input[type="text"]:focus,
+html.light input[type="email"]:focus,
+html.light textarea:focus {
+  border-color: #520380 !important;
+  box-shadow:   0 0 0 3px rgba(82,3,128,0.15) !important;
+  outline:      none !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #a78bfa !important;
+}
+
+/* ── Glassmorphism ── */
+html.light .glass-light {
+  background:               rgba(243,238,255,0.88) !important;
+  backdrop-filter:          blur(20px) !important;
+  -webkit-backdrop-filter:  blur(20px) !important;
+  border:                   1px solid rgba(82,3,128,0.22) !important;
+  box-shadow:               0 4px 24px rgba(82,3,128,0.1) !important;
+}
+
+/* ── Blobs → deep purple tint ── */
+html.light .bg-purple-600\/20 { background-color: rgba(82,3,128,0.15) !important; }
+html.light .bg-purple-400\/15 { background-color: rgba(82,3,128,0.1)  !important; }
+html.light .bg-indigo-500\/10 { background-color: rgba(58,2,91,0.08)  !important; }
+html.light .bg-purple-600\/10 { background-color: rgba(82,3,128,0.1)  !important; }
+html.light .blob { opacity: 0.5; }
+
+/* ── Timeline gradient line ── */
+html.light .from-purple-400 { --tw-gradient-from: #520380 !important; }
+html.light .via-purple-200  { --tw-gradient-via:  #c4b5fd !important; }
+
+/* ── Section heading accent labels ── */
+html.light p.text-purple-400,
+html.light p.text-purple-600 {
+  color: #520380 !important;
+}
+
+/* ── Divider lines ── */
+html.light .h-\[1px\].bg-gray-100,
+html.light .bg-gray-100.flex-1 {
+  background-color: rgba(82,3,128,0.18) !important;
+}
+
+/* ── Keyboard badges ── */
+html.light .bg-gray-200.text-gray-500 {
+  background-color: #e8d9ff !important;
+  color:            #520380 !important;
+}
+
+/* ── Scroll progress bar ── */
+html.light .from-purple-600.via-purple-400.to-purple-300 {
+  background: linear-gradient(to right, #11001C, #520380, #a78bfa) !important;
+}
+
+/* ── Footer — very dark purple premium ── */
+html.light footer {
+  background: linear-gradient(160deg, #1A0129 0%, #11001C 100%) !important;
+}
+html.light footer p,
+html.light footer span:not(.text-gradient) {
+  color: #c4b5fd !important;
+}
+html.light footer a         { color: #c4b5fd !important; }
+html.light footer a:hover   { color: #e9d5ff !important; }
+html.light footer .text-gradient {
+  background:               linear-gradient(135deg, #c4b5fd, #e9d5ff) !important;
+  -webkit-background-clip:  text !important;
+  -webkit-text-fill-color:  transparent !important;
+  background-clip:          text !important;
+}
+html.light footer .border-gray-200 {
+  border-color: rgba(196,181,253,0.15) !important;
+}
+html.light footer kbd {
+  background-color: rgba(255,255,255,0.08) !important;
+  color:            #c4b5fd !important;
+}
+html.light footer .text-gray-500,
+html.light footer .text-gray-600,
+html.light footer .text-gray-700 {
+  color: #a78bfa !important;
+}
+
+/* ── Navbar (scrolled state) ── */
+html.light [style*="rgba(255,255,255,0.94)"] {
+  background: rgba(243,238,255,0.95) !important;
+}
+html.light [style*="#f3f4f6"] {
+  background-color: #e8d9ff !important;
+}
+
+/* ── White social/icon buttons ── */
+html.light .bg-white.text-gray-500,
+html.light .bg-white.text-gray-600 {
+  border-color: rgba(82,3,128,0.22) !important;
+  box-shadow:   0 1px 6px rgba(82,3,128,0.08) !important;
+}
+html.light .bg-white.text-gray-500:hover,
+html.light .bg-white.text-gray-600:hover {
+  background-color: #f3eeff !important;
+  border-color:     rgba(82,3,128,0.38) !important;
+  color:            #520380 !important;
+}
