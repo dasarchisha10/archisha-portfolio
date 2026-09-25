@@ -49,7 +49,6 @@ export default function Hero() {
    <section
       id="home"
       style={{ position: 'relative', zIndex: 10 }}
-      style={{ position: 'relative', zIndex: 10 }}
       className={`relative min-h-screen flex items-center overflow-hidden ${
         isDark
           ? 'bg-[#070B18]'
