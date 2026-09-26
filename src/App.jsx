@@ -10,14 +10,14 @@ import Footer          from './components/Footer';
 import CommandPalette  from './components/CommandPalette';
 import FloatingIcons   from './components/FloatingIcons';
 
-import Hero         from './sections/Hero';
-import About        from './sections/About';
-import Education    from './sections/Education';
-import Skills       from './sections/Skills';
-import Projects     from './sections/Projects';
-import Certificates from './sections/Certificates';
-import HireMe       from './sections/HireMe';
-import Contact      from './sections/Contact';
+import Hero         from './Sections/Hero';
+import About        from './Sections/About';
+import Education    from './Sections/Education';
+import Skills       from './Sections/Skills';
+import Projects     from './Sections/Projects';
+import Certificates from './Sections/Certificates';
+import HireMe       from './Sections/HireMe';
+import Contact      from './Sections/Contact';
 
 export default function App() {
   const { isDark } = useTheme();
