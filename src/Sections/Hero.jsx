@@ -6,19 +6,19 @@ import { useTheme } from '../context/ThemeContext';
 const roles = ['Frontend Developer', 'React Developer', 'Web Developer', 'MCA Student'];
 
 const techIcons = [
-  { label: 'HTML',   color: '#E44D26', pos: 'top-[10%] left-[5%]'   },
-  { label: 'CSS',    color: '#1572B6', pos: 'top-[20%] right-[8%]'  },
-  { label: 'JS',     color: '#F7DF1E', pos: 'bottom-[25%] left-[8%]'},
-  { label: 'React',  color: '#61DAFB', pos: 'top-[55%] right-[5%]'  },
-  { label: 'Python', color: '#3776AB', pos: 'bottom-[10%] right-[15%]'},
-  { label: 'SQL',    color: '#00758F', pos: 'top-[40%] left-[2%]'   },
+  { label: 'HTML',   color: '#E44D26', pos: 'top-[10%] left-[2%]'    },
+  { label: 'CSS',    color: '#1572B6', pos: 'top-[20%] right-[3%]'   },
+  { label: 'JS',     color: '#F7DF1E', pos: 'bottom-[25%] left-[3%]' },
+  { label: 'React',  color: '#61DAFB', pos: 'top-[55%] right-[2%]'   },
+  { label: 'Python', color: '#3776AB', pos: 'bottom-[10%] right-[8%]'},
+  { label: 'SQL',    color: '#00758F', pos: 'top-[40%] left-[1%]'    },
 ];
 
 export default function Hero() {
   const { isDark } = useTheme();
-  const [roleIndex,   setRoleIndex]   = useState(0);
-  const [displayed,   setDisplayed]   = useState('');
-  const [isDeleting,  setIsDeleting]  = useState(false);
+  const [roleIndex,  setRoleIndex]  = useState(0);
+  const [displayed,  setDisplayed]  = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const current = roles[roleIndex];
@@ -46,7 +46,7 @@ export default function Hero() {
   };
 
   return (
-   <section
+    <section
       id="home"
       style={{ position: 'relative', zIndex: 10 }}
       className={`relative min-h-screen flex items-center overflow-hidden ${
@@ -57,16 +57,16 @@ export default function Hero() {
     >
       {/* ── Background ambient blobs ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="blob absolute -top-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl" />
-        <div className="blob blob-delay-2 absolute top-1/2 -right-20 w-80 h-80 bg-purple-400/15 rounded-full filter blur-3xl" />
-        <div className="blob blob-delay-4 absolute -bottom-20 left-1/3 w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl" />
+        <div className="blob absolute -top-40 -left-40 w-72 sm:w-80 lg:w-96 h-72 sm:h-80 lg:h-96 bg-purple-600/20 rounded-full filter blur-3xl" />
+        <div className="blob blob-delay-2 absolute top-1/2 -right-20 w-64 sm:w-72 lg:w-80 h-64 sm:h-72 lg:h-80 bg-purple-400/15 rounded-full filter blur-3xl" />
+        <div className="blob blob-delay-4 absolute -bottom-20 left-1/3 w-56 sm:w-64 lg:w-72 h-56 sm:h-64 lg:h-72 bg-indigo-500/10 rounded-full filter blur-3xl" />
       </div>
 
-      {/* ── Small floating tech icons (sides) ── */}
+      {/* ── Small floating tech icons (only on xl+ to avoid overlap) ── */}
       {techIcons.map((tech, i) => (
         <motion.div
           key={tech.label}
-          className={`absolute ${tech.pos} hidden lg:flex flex-col items-center gap-1`}
+          className={`absolute ${tech.pos} hidden xl:flex flex-col items-center gap-1`}
           animate={{ y: [0, -12, 0], rotate: [0, 3, 0] }}
           transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
         >
@@ -79,48 +79,59 @@ export default function Hero() {
         </motion.div>
       ))}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 pb-20">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-16 pt-24 sm:pt-28 lg:pt-28 pb-16 sm:pb-20">
+        <div className="flex flex-col lg:flex-row items-center gap-10 sm:gap-12 lg:gap-16">
 
           {/* ════════════ LEFT CONTENT ════════════ */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="flex-1 text-center lg:text-left"
+            className="flex-1 w-full text-center lg:text-left order-2 lg:order-1"
           >
+            {/* Availability badge */}
             <motion.div variants={itemVariants}>
-              <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6 ${
-                isDark
-                  ? 'bg-purple-500/15 text-purple-300 border border-purple-500/30'
-                  : 'bg-purple-100 text-purple-700'
-              }`}>
+              <span
+                className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-5 sm:mb-6 ${
+                  isDark
+                    ? 'bg-purple-500/15 text-purple-300 border border-purple-500/30'
+                    : 'bg-purple-100 text-purple-700'
+                }`}
+              >
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 Open to Opportunities
               </span>
             </motion.div>
 
+            {/* Name */}
             <motion.div variants={itemVariants} className="mb-4">
-              <p className={`text-lg font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+              <p className={`text-base sm:text-lg font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                 Hi, I'm
               </p>
-              <h1 className={`text-5xl md:text-6xl lg:text-7xl font-black leading-tight ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
+              <h1
+                className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}
+              >
                 Archisha
                 <br />
                 <span className="text-gradient">Das</span>
               </h1>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="text-xl md:text-2xl font-semibold mb-6 h-8">
+            {/* Typewriter role */}
+            <motion.div
+              variants={itemVariants}
+              className="text-lg sm:text-xl md:text-2xl font-semibold mb-5 sm:mb-6 h-7 sm:h-8"
+            >
               <span className="text-gradient">{displayed}</span>
               <span className="animate-pulse text-purple-400 ml-1">|</span>
             </motion.div>
 
+            {/* Bio */}
             <motion.p
               variants={itemVariants}
-              className={`max-w-xl text-base leading-relaxed mb-10 mx-auto lg:mx-0 ${
+              className={`max-w-xl text-sm sm:text-base leading-relaxed mb-8 sm:mb-10 mx-auto lg:mx-0 px-2 sm:px-0 ${
                 isDark ? 'text-gray-400' : 'text-gray-600'
               }`}
             >
@@ -129,12 +140,18 @@ export default function Hero() {
               web experiences using modern technologies.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4 justify-center lg:justify-start">
+            {/* CTA buttons */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start"
+            >
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(124,92,252,0.5)' }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 transition-all duration-300"
+                onClick={() =>
+                  document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-400 transition-all duration-300"
               >
                 View Projects <FiArrowRight />
               </motion.button>
@@ -144,7 +161,7 @@ export default function Hero() {
                 download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold border transition-all duration-300 ${
+                className={`flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl font-semibold border transition-all duration-300 ${
                   isDark
                     ? 'border-purple-500/40 text-purple-300 hover:bg-purple-500/10'
                     : 'border-purple-300 text-purple-700 hover:bg-purple-50'
@@ -155,7 +172,10 @@ export default function Hero() {
             </motion.div>
 
             {/* Socials */}
-            <motion.div variants={itemVariants} className="flex gap-4 mt-8 justify-center lg:justify-start">
+            <motion.div
+              variants={itemVariants}
+              className="flex gap-4 mt-7 sm:mt-8 justify-center lg:justify-start"
+            >
               {[
                 { Icon: FiGithub,   href: 'https://github.com/dasarchisha10', label: 'GitHub'   },
                 { Icon: FiLinkedin, href: 'https://linkedin.com/',             label: 'LinkedIn' },
@@ -183,8 +203,11 @@ export default function Hero() {
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative flex-shrink-0 flex items-center justify-center"
-            style={{ width: '400px', height: '460px' }}
+            className="relative flex-shrink-0 flex items-center justify-center order-1 lg:order-2
+                       w-[280px] h-[320px]
+                       sm:w-[340px] sm:h-[390px]
+                       md:w-[380px] md:h-[440px]
+                       lg:w-[400px] lg:h-[460px]"
           >
             {/* Layer 1 — Outer ambient glow */}
             <div
@@ -211,10 +234,10 @@ export default function Hero() {
 
             {/* Layer 3 — Organic SVG morphing blob */}
             <svg
-              className="absolute"
+              className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[320px] md:h-[320px] lg:w-[340px] lg:h-[340px]"
               style={{
-                width: '340px', height: '340px',
-                top: '50%', left: '50%',
+                top: '50%',
+                left: '50%',
                 transform: 'translate(-50%, -50%)',
               }}
               viewBox="0 0 400 400"
@@ -242,15 +265,21 @@ export default function Hero() {
 
             {/* Layer 4 — Slow spinning decorative ring */}
             <div
-              className="absolute rounded-full border border-purple-500/18 animate-spin-slow"
-              style={{ width: '370px', height: '370px' }}
+              className="absolute rounded-full border border-purple-500/18 animate-spin-slow
+                         w-[260px] h-[260px]
+                         sm:w-[315px] sm:h-[315px]
+                         md:w-[350px] md:h-[350px]
+                         lg:w-[370px] lg:h-[370px]"
             />
 
             {/* Layer 5 — Inner purple glow */}
             <div
-              className="absolute rounded-full"
+              className="absolute rounded-full
+                         w-[180px] h-[180px]
+                         sm:w-[215px] sm:h-[215px]
+                         md:w-[240px] md:h-[240px]
+                         lg:w-[255px] lg:h-[255px]"
               style={{
-                width: '255px', height: '255px',
                 background: isDark
                   ? 'radial-gradient(circle, rgba(124,92,252,0.22) 0%, transparent 72%)'
                   : 'radial-gradient(circle, rgba(124,92,252,0.13) 0%, transparent 72%)',
@@ -258,13 +287,16 @@ export default function Hero() {
               }}
             />
 
-            {/* Layer 6 — Profile image (ORGANIC shape — not a circle) */}
+            {/* Layer 6 — Profile image (ORGANIC shape) */}
             <motion.div
               animate={{ y: [0, -9, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
               whileHover={{ scale: 1.025 }}
-              className="relative z-10"
-              style={{ width: '295px', height: '345px' }}
+              className="relative z-10
+                         w-[210px] h-[245px]
+                         sm:w-[250px] sm:h-[295px]
+                         md:w-[280px] md:h-[325px]
+                         lg:w-[295px] lg:h-[345px]"
             >
               <div
                 style={{
@@ -295,11 +327,10 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -7, 0] }}
               transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-              className="absolute z-20"
-              style={{ top: '28px', right: '-8px' }}
+              className="absolute z-20 top-2 sm:top-4 lg:top-7 -right-1 sm:-right-2"
             >
               <div
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold backdrop-blur-md ${
                   isDark
                     ? 'bg-white/10 border border-white/20 text-white'
                     : 'bg-white/90 border border-purple-100 text-purple-700'
@@ -314,11 +345,10 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -7, 0] }}
               transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1.4 }}
-              className="absolute z-20"
-              style={{ bottom: '28px', left: '-8px' }}
+              className="absolute z-20 bottom-2 sm:bottom-4 lg:bottom-7 -left-1 sm:-left-2"
             >
               <div
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold backdrop-blur-md ${
                   isDark
                     ? 'bg-white/10 border border-white/20 text-white'
                     : 'bg-white/90 border border-purple-100 text-purple-700'
@@ -333,11 +363,10 @@ export default function Hero() {
             <motion.div
               animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0.9, 0.4] }}
               transition={{ duration: 2.4, repeat: Infinity }}
-              className="absolute z-20"
+              className="absolute z-20 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full"
               style={{
-                top: '62px', left: '22px',
-                width: '10px', height: '10px',
-                borderRadius: '50%',
+                top: '46px',
+                left: '14px',
                 background: 'rgba(124,92,252,0.7)',
                 boxShadow:  '0 0 14px rgba(124,92,252,0.7)',
               }}
@@ -345,11 +374,10 @@ export default function Hero() {
             <motion.div
               animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.7, 0.3] }}
               transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-              className="absolute z-20"
+              className="absolute z-20 w-1.5 h-1.5 rounded-full"
               style={{
-                bottom: '78px', right: '12px',
-                width: '7px', height: '7px',
-                borderRadius: '50%',
+                bottom: '58px',
+                right: '8px',
                 background: 'rgba(158,120,255,0.6)',
                 boxShadow:  '0 0 10px rgba(158,120,255,0.6)',
               }}
@@ -362,15 +390,15 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
         >
-          <p className={`text-xs tracking-widest uppercase ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+          <p className={`text-[10px] sm:text-xs tracking-widest uppercase ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
             Scroll
           </p>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-[1px] h-12 bg-gradient-to-b from-purple-500 to-transparent"
+            className="w-[1px] h-8 sm:h-10 lg:h-12 bg-gradient-to-b from-purple-500 to-transparent"
           />
         </motion.div>
       </div>
