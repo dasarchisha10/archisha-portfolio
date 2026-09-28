@@ -492,3 +492,149 @@ html.light .glow-purple {
   box-shadow: 0 0 24px rgba(99,102,241,0.2),
               0 2px 12px rgba(99,102,241,0.08) !important;
 }
+/* ═══════════════════════════════════════════════════════
+   🧊 CARD SIDE DEPTH (3D SIDE SHADOW) — DARK + LIGHT
+   Applies to all cards EXCEPT navbar
+═══════════════════════════════════════════════════════ */
+
+/* ── DARK MODE: all .rounded-2xl / .rounded-3xl / .rounded-xl cards ── */
+html.dark .rounded-2xl:not(nav *),
+html:not(.light) .rounded-2xl:not(nav *) {
+  box-shadow:
+    6px 6px 0 rgba(0, 0, 0, 0.35),
+    10px 10px 0 rgba(124, 92, 252, 0.08),
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+html.dark .rounded-2xl:not(nav *):hover,
+html:not(.light) .rounded-2xl:not(nav *):hover {
+  transform: translate(-3px, -3px);
+  box-shadow:
+    10px 10px 0 rgba(0, 0, 0, 0.4),
+    16px 16px 0 rgba(124, 92, 252, 0.12),
+    0 28px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+html.dark .rounded-3xl:not(nav *),
+html:not(.light) .rounded-3xl:not(nav *) {
+  box-shadow:
+    8px 8px 0 rgba(0, 0, 0, 0.35),
+    14px 14px 0 rgba(124, 92, 252, 0.08),
+    0 24px 50px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+html.dark .rounded-3xl:not(nav *):hover,
+html:not(.light) .rounded-3xl:not(nav *):hover {
+  transform: translate(-4px, -4px);
+  box-shadow:
+    12px 12px 0 rgba(0, 0, 0, 0.4),
+    20px 20px 0 rgba(124, 92, 252, 0.14),
+    0 32px 70px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+html.dark .rounded-xl:not(nav *),
+html:not(.light) .rounded-xl:not(nav *) {
+  box-shadow:
+    4px 4px 0 rgba(0, 0, 0, 0.3),
+    6px 6px 0 rgba(124, 92, 252, 0.06),
+    0 10px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+html.dark .rounded-xl:not(nav *):hover,
+html:not(.light) .rounded-xl:not(nav *):hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    7px 7px 0 rgba(0, 0, 0, 0.35),
+    10px 10px 0 rgba(124, 92, 252, 0.1),
+    0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+/* ── LIGHT MODE: all .rounded-2xl / .rounded-3xl / .rounded-xl cards ── */
+html.light .rounded-2xl:not(nav *) {
+  box-shadow:
+    6px 6px 0 rgba(99, 102, 241, 0.18),
+    10px 10px 0 rgba(30, 27, 75, 0.06),
+    0 20px 40px rgba(99, 102, 241, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+html.light .rounded-2xl:not(nav *):hover {
+  transform: translate(-3px, -3px);
+  box-shadow:
+    10px 10px 0 rgba(99, 102, 241, 0.24),
+    16px 16px 0 rgba(30, 27, 75, 0.08),
+    0 28px 60px rgba(99, 102, 241, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light .rounded-3xl:not(nav *) {
+  box-shadow:
+    8px 8px 0 rgba(99, 102, 241, 0.2),
+    14px 14px 0 rgba(30, 27, 75, 0.06),
+    0 24px 50px rgba(99, 102, 241, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+html.light .rounded-3xl:not(nav *):hover {
+  transform: translate(-4px, -4px);
+  box-shadow:
+    12px 12px 0 rgba(99, 102, 241, 0.26),
+    20px 20px 0 rgba(30, 27, 75, 0.09),
+    0 32px 70px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light .rounded-xl:not(nav *) {
+  box-shadow:
+    4px 4px 0 rgba(99, 102, 241, 0.16),
+    6px 6px 0 rgba(30, 27, 75, 0.05),
+    0 10px 24px rgba(99, 102, 241, 0.1) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+html.light .rounded-xl:not(nav *):hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    7px 7px 0 rgba(99, 102, 241, 0.22),
+    10px 10px 0 rgba(30, 27, 75, 0.07),
+    0 16px 36px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* ── Explicitly strip depth from navbar and everything inside it ── */
+nav,
+nav * {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Restore the theme-toggle / menu button hover look inside navbar */
+html.dark nav button:hover,
+html:not(.light) nav button:hover {
+  box-shadow: 0 0 20px rgba(124, 92, 252, 0.25) !important;
+}
+html.light nav button:hover {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* ── Skip pills / tags — they should stay flat ── */
+html.dark .rounded-full,
+html:not(.light) .rounded-full,
+html.light .rounded-full {
+  box-shadow: inherit;
+}
+
+/* ── Skip buttons and images inside cards ── */
+html.dark button.rounded-xl,
+html.dark button.rounded-2xl,
+html.light button.rounded-xl,
+html.light button.rounded-2xl {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+  transform: none !important;
+}
+html.light button.rounded-xl,
+html.light button.rounded-2xl {
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1) !important;
+}

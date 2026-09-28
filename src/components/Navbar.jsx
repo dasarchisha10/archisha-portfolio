@@ -8,6 +8,7 @@ const navLinks = [
   { label: 'About', keyword: 'about' },
   { label: 'Education', keyword: 'education' },
   { label: 'Skills', keyword: 'skills' },
+  { label: 'Projects', keyword: 'projects' },
   { label: 'Certificate', keyword: 'certif' },
   { label: 'Contact', keyword: 'contact' },
 ];
@@ -18,15 +19,21 @@ export default function Navbar() {
   const [active, setActive] = useState('Home');
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Find section strictly by ID first, then by data attribute, then by exact id match
   const findSectionByKeyword = (keyword) => {
-    const mainElement = document.querySelector('main');
-    if (!mainElement) return null;
+    // 1. Try exact ID match (most reliable)
+    const sectionById = document.getElementById(keyword);
+    if (sectionById) return sectionById;
 
-    return Array.from(mainElement.children).find((child) => {
-      const content = child.innerHTML?.toLowerCase() || '';
-      const componentName = child.constructor?.name?.toLowerCase() || '';
-      return content.includes(keyword) || componentName.includes(keyword);
-    });
+    // 2. Try data-section attribute
+    const sectionByData = document.querySelector(`[data-section="${keyword}"]`);
+    if (sectionByData) return sectionByData;
+
+    // 3. Try ID that contains the keyword (e.g., "projects-section")
+    const sectionByPartialId = document.querySelector(`[id*="${keyword}"]`);
+    if (sectionByPartialId) return sectionByPartialId;
+
+    return null;
   };
 
   useEffect(() => {
@@ -40,20 +47,36 @@ export default function Navbar() {
 
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
 
-      for (const link of navLinks) {
-        const section = findSectionByKeyword(link.keyword);
-        if (section) {
+      // Build a list of sections with their positions
+      const sectionsWithPositions = navLinks
+        .map((link) => {
+          const section = findSectionByKeyword(link.keyword);
+          if (!section) return null;
           const top = section.getBoundingClientRect().top + window.scrollY;
           const height = section.offsetHeight;
+          return { label: link.label, top, height };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.top - b.top);
 
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActive(link.label);
-          }
+      // Find the section that contains the scroll position
+      let currentActive = 'Home';
+      for (const section of sectionsWithPositions) {
+        if (scrollPosition >= section.top && scrollPosition < section.top + section.height) {
+          currentActive = section.label;
+          break;
+        }
+        // If we've scrolled past this section, it's a candidate
+        if (scrollPosition >= section.top) {
+          currentActive = section.label;
         }
       }
+
+      setActive(currentActive);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Small delay to allow sections to render
     const timeoutId = setTimeout(handleScroll, 500);
 
     return () => {

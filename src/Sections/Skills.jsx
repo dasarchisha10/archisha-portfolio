@@ -66,20 +66,20 @@ function SkillTag({ Icon, name, color, isDark }) {
         scale:           1.05,
         borderColor:     '#7C5CFC',
         backgroundColor: isDark ? 'rgba(124,92,252,0.14)' : 'rgba(124,92,252,0.06)',
-        boxShadow:        '0 10px 24px rgba(124,92,252,0.2)',
+        boxShadow:       '0 10px 24px rgba(124,92,252,0.2)',
       }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
+      className="rounded-xl"
       style={{
-        display:       'flex',
-        alignItems:    'center',
-        gap:           '8px',
-        padding:       '10px 16px',
-        borderRadius:  '12px',
-        borderWidth:   '1px',
-        borderStyle:   'solid',
-        borderColor:   isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
-        background:    isDark ? 'rgba(255,255,255,0.04)' : '#ffffff',
-        cursor:        'default',
+        display:      'flex',
+        alignItems:   'center',
+        gap:          '8px',
+        padding:      '10px 16px',
+        borderWidth:  '1px',
+        borderStyle:  'solid',
+        borderColor:  isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
+        background:   isDark ? 'rgba(255,255,255,0.04)' : '#ffffff',
+        cursor:       'default',
       }}
     >
       <Icon size={16} color={color} />
@@ -106,24 +106,21 @@ function SkillCategoryCard({ category, isDark, delay }) {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay }}
+      className="rounded-3xl"
       style={{
-        borderRadius: '20px',
         padding:      '28px',
         background:   isDark ? 'rgba(255,255,255,0.03)' : '#ffffff',
         borderWidth:  '1px',
         borderStyle:  'solid',
         borderColor:  isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
-        boxShadow:    isDark
-          ? '0 4px 24px rgba(0,0,0,0.25)'
-          : '0 4px 20px rgba(124,92,252,0.06)',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
         <div
+          className="rounded-xl"
           style={{
             width:          '40px',
             height:         '40px',
-            borderRadius:   '12px',
             display:        'flex',
             alignItems:     'center',
             justifyContent: 'center',
@@ -165,6 +162,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
+      data-section="skills"
       ref={ref}
       className={`relative py-28 overflow-hidden ${isDark ? 'bg-[#070B18]' : 'bg-white'}`}
     >

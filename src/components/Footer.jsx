@@ -30,7 +30,7 @@ export default function Footer() {
         <span
           className="font-black whitespace-nowrap tracking-tight"
           style={{
-            fontSize:   'clamp(3rem, 11vw, 8.5rem)',
+            fontSize:      'clamp(3rem, 11vw, 8.5rem)',
             letterSpacing: '-0.03em',
             color: isDark
               ? 'rgba(255,255,255,0.025)'
@@ -71,55 +71,70 @@ export default function Footer() {
 
       {/* ── Footer content ── */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
-          {/* Logo */}
-          <div className="text-2xl font-black">
-            <span className="text-gradient">A</span>
-            <span className={isDark ? 'text-white' : 'text-gray-900'}>D</span>
+        {/* Main row — 3 equal columns on desktop, centered stack on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-8 md:gap-4">
+
+          {/* Left — Logo */}
+          <div className="flex justify-center md:justify-start">
+            <div className="text-2xl font-black leading-none">
+              <span className="text-gradient">A</span>
+              <span className={isDark ? 'text-white' : 'text-gray-900'}>D</span>
+            </div>
           </div>
 
-          {/* Copyright */}
-          <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-            Made with ❤️ by{' '}
-            <span className="text-gradient font-semibold">Archisha Das</span>
-          </p>
+          {/* Center — Copyright */}
+          <div className="flex justify-center">
+            <p className={`text-sm text-center ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+              Made with <span className="text-purple-400">❤️</span> by{' '}
+              <span className="text-gradient font-semibold">Archisha Das</span>
+            </p>
+          </div>
 
-          {/* Social icons */}
-          <div className="flex items-center gap-3">
-            {[
-              { Icon: FiGithub,   href: 'https://github.com/dasarchisha10'     },
-              { Icon: FiLinkedin, href: 'https://linkedin.com/'                 },
-              { Icon: FiMail,     href: 'mailto:dasarchisha19@gmail.com'        },
-            ].map(({ Icon, href }, i) => (
-              <motion.a
-                key={i}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ y: -3, scale: 1.1 }}
-                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${
-                  isDark
-                    ? 'bg-white/10 text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 border border-white/10'
-                    : 'bg-white text-gray-500 hover:text-purple-600 hover:bg-purple-50 border border-gray-200'
-                }`}
-              >
-                <Icon size={16} />
-              </motion.a>
-            ))}
+          {/* Right — Social icons */}
+          <div className="flex justify-center md:justify-end">
+            <div className="flex items-center gap-3">
+              {[
+                { Icon: FiGithub,   href: 'https://github.com/dasarchisha10' },
+                { Icon: FiLinkedin, href: 'https://linkedin.com/'             },
+                { Icon: FiMail,     href: 'mailto:dasarchisha19@gmail.com'    },
+              ].map(({ Icon, href }, i) => (
+                <motion.a
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${
+                    isDark
+                      ? 'bg-white/10 text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 border border-white/10'
+                      : 'bg-white text-gray-500 hover:text-purple-600 hover:bg-purple-50 border border-gray-200'
+                  }`}
+                >
+                  <Icon size={16} />
+                </motion.a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Ctrl+K hint */}
-        <div className="mt-6 text-center">
-          <p className={`text-xs ${isDark ? 'text-gray-700' : 'text-gray-300'}`}>
+        {/* Divider */}
+        <div
+          className={`mt-8 mb-5 h-[1px] w-full ${
+            isDark ? 'bg-white/[0.06]' : 'bg-purple-100'
+          }`}
+        />
+
+        {/* Ctrl+K hint — centered */}
+        <div className="flex justify-center">
+          <p className={`text-xs text-center leading-relaxed ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
             Press{' '}
-            <kbd className={`px-1.5 py-0.5 rounded text-xs mx-0.5 ${
-              isDark ? 'bg-white/10 text-gray-500' : 'bg-gray-200 text-gray-500'
+            <kbd className={`px-1.5 py-0.5 rounded text-xs mx-0.5 font-mono ${
+              isDark ? 'bg-white/10 text-gray-400' : 'bg-gray-200 text-gray-600'
             }`}>Ctrl</kbd>
             +
-            <kbd className={`px-1.5 py-0.5 rounded text-xs mx-0.5 ${
-              isDark ? 'bg-white/10 text-gray-500' : 'bg-gray-200 text-gray-500'
+            <kbd className={`px-1.5 py-0.5 rounded text-xs mx-0.5 font-mono ${
+              isDark ? 'bg-white/10 text-gray-400' : 'bg-gray-200 text-gray-600'
             }`}>K</kbd>
             {' '}to navigate quickly
           </p>
@@ -131,6 +146,7 @@ export default function Footer() {
         onClick={scrollTop}
         whileHover={{ scale: 1.1, y: -3 }}
         whileTap={{ scale: 0.9 }}
+        aria-label="Back to top"
         className="fixed bottom-8 right-8 w-12 h-12 rounded-xl bg-gradient-to-r from-purple-600 to-purple-400 flex items-center justify-center text-white z-50"
         style={{ boxShadow: '0 0 20px rgba(124,92,252,0.4)' }}
       >

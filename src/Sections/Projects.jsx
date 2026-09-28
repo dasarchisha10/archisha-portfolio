@@ -6,26 +6,36 @@ import { useTheme } from '../context/ThemeContext';
 const filters = ['All', 'React', 'JavaScript', 'Python'];
 
 // ✏️ REPLACE THESE with your actual projects later!
+// Add `github` and `live` fields for each project.
 const projects = [
   {
     id: 1,
-    title: 'Add Your Project Here',
-    description: 'Replace this with your first real project description. Add the GitHub link and live demo link below.',
+    title: 'Portfolio Website',
+    description:
+      'Replace this with your first real project description. Add the GitHub link and live demo link below.',
     tags: ['React', 'JavaScript'],
+    github: 'https://github.com/dasarchisha10/archisha-portfolio', // 🔗 replace
+    live: 'https://archisha-portfolio-alpha.vercel.app',                // 🔗 replace
     placeholder: true,
   },
   {
     id: 2,
     title: 'Add Your Project Here',
-    description: 'Replace this with your second real project description. Describe what it does and what you learned.',
+    description:
+      'Replace this with your second real project description. Describe what it does and what you learned.',
     tags: ['JavaScript'],
+    github: '',   // empty = no button shown / disabled
+    live: '',
     placeholder: true,
   },
   {
     id: 3,
     title: 'Add Your Project Here',
-    description: 'Replace this with your third real project description. You can also add a Python project here.',
+    description:
+      'Replace this with your third real project description. You can also add a Python project here.',
     tags: ['Python'],
+    github: '',
+    live: '',
     placeholder: true,
   },
 ];
@@ -33,6 +43,9 @@ const projects = [
 function ProjectCard({ project, isDark, delay }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  const hasGithub = Boolean(project.github);
+  const hasLive = Boolean(project.live);
 
   return (
     <motion.div
@@ -48,9 +61,13 @@ function ProjectCard({ project, isDark, delay }) {
       }`}
     >
       {/* Image placeholder */}
-      <div className={`relative w-full h-52 overflow-hidden ${
-        isDark ? 'bg-gradient-to-br from-purple-900/50 to-indigo-900/50' : 'bg-gradient-to-br from-purple-50 to-indigo-50'
-      }`}>
+      <div
+        className={`relative w-full h-52 overflow-hidden ${
+          isDark
+            ? 'bg-gradient-to-br from-purple-900/50 to-indigo-900/50'
+            : 'bg-gradient-to-br from-purple-50 to-indigo-50'
+        }`}
+      >
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
           <motion.div
             whileHover={{ scale: 1.1, rotate: 90 }}
@@ -67,20 +84,49 @@ function ProjectCard({ project, isDark, delay }) {
           whileHover={{ opacity: 1 }}
           className="absolute inset-0 bg-purple-900/60 backdrop-blur-sm flex items-center justify-center gap-4"
         >
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.1 }}
-            className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white border border-white/30"
-          >
-            <FiGithub size={18} />
-          </motion.a>
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.1 }}
-            className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white border border-white/30"
-          >
-            <FiExternalLink size={18} />
-          </motion.a>
+          {hasGithub ? (
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              aria-label="Open GitHub repository"
+              className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white border border-white/30 hover:bg-white/30 transition-colors"
+            >
+              <FiGithub size={18} />
+            </motion.a>
+          ) : (
+            <div
+              className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-white/40 border border-white/20 cursor-not-allowed"
+              title="No GitHub link yet"
+            >
+              <FiGithub size={18} />
+            </div>
+          )}
+
+          {hasLive ? (
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              aria-label="Open live demo"
+              className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white border border-white/30 hover:bg-white/30 transition-colors"
+            >
+              <FiExternalLink size={18} />
+            </motion.a>
+          ) : (
+            <div
+              className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-white/40 border border-white/20 cursor-not-allowed"
+              title="No live demo yet"
+            >
+              <FiExternalLink size={18} />
+            </div>
+          )}
         </motion.div>
       </div>
 
@@ -93,7 +139,7 @@ function ProjectCard({ project, isDark, delay }) {
           {project.description}
         </p>
         <div className="flex flex-wrap gap-2">
-          {project.tags.map(tag => (
+          {project.tags.map((tag) => (
             <span
               key={tag}
               className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -115,13 +161,13 @@ export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const filtered = active === 'All'
-    ? projects
-    : projects.filter(p => p.tags.includes(active));
+  const filtered =
+    active === 'All' ? projects : projects.filter((p) => p.tags.includes(active));
 
   return (
     <section
       id="projects"
+      data-section="projects"
       ref={ref}
       className={`relative py-28 ${isDark ? 'bg-[#0a0f1e]' : 'bg-gray-50'}`}
     >
@@ -136,10 +182,18 @@ export default function Projects() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p className={`text-sm font-semibold tracking-widest uppercase mb-3 ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
+          <p
+            className={`text-sm font-semibold tracking-widest uppercase mb-3 ${
+              isDark ? 'text-purple-400' : 'text-purple-600'
+            }`}
+          >
             What I've Built
           </p>
-          <h2 className={`text-4xl md:text-5xl font-black mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2
+            className={`text-4xl md:text-5xl font-black mb-6 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}
+          >
             My <span className="text-gradient">Projects</span>
           </h2>
           <p className={`max-w-lg mx-auto text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -149,7 +203,7 @@ export default function Projects() {
 
         {/* Filter tabs */}
         <div className="flex flex-wrap gap-3 justify-center mb-12">
-          {filters.map(filter => (
+          {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setActive(filter)}
